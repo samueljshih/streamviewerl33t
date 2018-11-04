@@ -5,15 +5,31 @@ import StreamList from './StreamList.jsx';
 import Search from './Search.jsx';
 import ReactDOM from 'react-dom';
 
+var fakeData = [
+  { title: 'Lo Fi Beats' },
+  { title: 'Bounce Bounce' },
+  { title: 'Cats and Dogs' },
+  { title: 'Raining' },
+  { title: 'Sleep' }
+];
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: ''
+      value: '',
+      streams: [],
+      currentStream: null
     };
 
     // Binding event handlers to this context
     this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({
+      streams: fakeData
+    });
   }
 
   handleInputChange(e) {
@@ -36,7 +52,7 @@ class App extends Component {
             <StreamPlayer />
           </div>
           <div className="streamList">
-            <StreamList />
+            <StreamList streams={this.state.streams} />
           </div>
           {/* <button type="button" class="btn btn-primary">
             {' '}

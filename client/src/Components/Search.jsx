@@ -16,9 +16,7 @@ class Search extends Component {
             type="text"
             onChange={onInputChange}
           />
-          <button className="btn hidden-sm-down">
-            <span className="glyphicon glyphicon-search" />
-          </button>
+          <button className="btn btn-primary">Search</button>
         </div>
       </div>
     );
