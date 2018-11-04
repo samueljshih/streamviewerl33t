@@ -3,19 +3,10 @@ import React, { Component } from 'react';
 class Search extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      searchValue: ''
-    };
-  }
-
-  handleInputChange(e) {
-    this.props.handleSearchInputChange(e.target.value);
-    this.setState({
-      value: e.target.value
-    });
   }
 
   render() {
+    const { onInputChange } = this.props;
     return (
       <div>
         <h1>Search</h1>
@@ -23,8 +14,7 @@ class Search extends Component {
           <input
             className="form-control"
             type="text"
-            value={this.state.value}
-            onChange={this.handleInputChange.bind(this)}
+            onChange={onInputChange}
           />
           <button className="btn hidden-sm-down">
             <span className="glyphicon glyphicon-search" />

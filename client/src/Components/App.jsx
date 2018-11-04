@@ -8,6 +8,18 @@ import ReactDOM from 'react-dom';
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      value: ''
+    };
+
+    // Binding event handlers to this context
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  handleInputChange(e) {
+    this.setState({
+      value: e.target.value
+    });
   }
 
   render() {
@@ -17,7 +29,7 @@ class App extends Component {
           <Navbar />
         </div>
         <div className="searchContainer">
-          <Search />
+          <Search onInputChange={this.handleInputChange} />
         </div>
         <div className="streamContainer">
           <div className="streamPlayer">
