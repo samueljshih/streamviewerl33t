@@ -4,7 +4,7 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
       <a className="navbar-brand" href="#">
-        Navbar
+        Stream Viewer L33T
       </a>
       <button
         className="navbar-toggler"
@@ -27,29 +27,15 @@ const Navbar = () => {
           </li>
           <li className="nav-item">
             <a className="nav-link" href="#">
-              Link
+              About
             </a>
           </li>
           <li className="nav-item">
             <a className="nav-link disabled" href="#">
-              Disabled
+              Contact
             </a>
           </li>
         </ul>
-        <form className="form-inline my-2 my-lg-0">
-          <input
-            className="form-control mr-sm-2"
-            type="text"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button
-            className="btn btn-outline-success my-2 my-sm-0"
-            type="submit"
-          >
-            Search
-          </button>
-        </form>
       </div>
     </nav>
   );

@@ -5,4 +5,28 @@
 
 .streamContainer {
   text-align: center;
+  display: flex;
+}
+
+.searchContainer {
+  text-align: center;
+}
+
+.search-bar {
+  /* margin: 0 auto; */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.streamPlayer {
+  flex: 1;
+  background: red;
+  height: 500px;
+}
+
+.streamList {
+  flex: 1;
+  background: green;
+  height: 500px;
 }
