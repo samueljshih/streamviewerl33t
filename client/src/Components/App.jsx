@@ -19,6 +19,32 @@ class App extends Component {
     // Binding event handlers to this context
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleStreamEntryClicked = this.handleStreamEntryClicked.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.handleEnter = this.handleEnter.bind(this);
+  }
+
+  handleSearch() {
+    searchYoutubeStreams(this.state.value, data => {
+      var streams = data.data.items;
+      this.setState({
+        streams: streams,
+        currentStream: streams[0],
+        value: ''
+      });
+    });
+  }
+
+  handleEnter(e) {
+    if (e.keyCode === 13) {
+      searchYoutubeStreams(this.state.value, data => {
+        var streams = data.data.items;
+        this.setState({
+          streams: streams,
+          currentStream: streams[0],
+          value: ''
+        });
+      });
+    }
   }
 
   componentDidMount() {
@@ -32,7 +58,6 @@ class App extends Component {
   }
 
   handleStreamEntryClicked(stream) {
-    console.log('Clicked', stream);
     this.setState({
       currentStream: stream
     });
@@ -51,7 +76,12 @@ class App extends Component {
           <Navbar />
         </div>
         <div className="searchContainer">
-          <Search onInputChange={this.handleInputChange} />
+          <Search
+            onInputChange={this.handleInputChange}
+            onSearch={this.handleSearch}
+            onEnter={this.handleEnter}
+            value={this.state.value}
+          />
         </div>
         <div className="streamContainer">
           <div className="streamPlayer">

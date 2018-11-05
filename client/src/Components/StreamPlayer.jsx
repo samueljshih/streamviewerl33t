@@ -10,7 +10,7 @@ class StreamPlayer extends Component {
       return <div />;
     }
     const { id } = this.props.currentStream;
-    console.log('ID', id.videoId);
+
     return (
       <div>
         <h1>Stream Player</h1>

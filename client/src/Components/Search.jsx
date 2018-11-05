@@ -6,7 +6,7 @@ class Search extends Component {
   }
 
   render() {
-    const { onInputChange } = this.props;
+    const { onInputChange, onSearch, onEnter, value } = this.props;
     return (
       <div>
         <h1>Search</h1>
@@ -15,8 +15,12 @@ class Search extends Component {
             className="form-control"
             type="text"
             onChange={onInputChange}
+            onKeyDown={onEnter}
+            value={value}
           />
-          <button className="btn btn-primary">Search</button>
+          <button onClick={onSearch} className="btn btn-primary">
+            Search
+          </button>
         </div>
       </div>
     );
