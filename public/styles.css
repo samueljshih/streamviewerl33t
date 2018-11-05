@@ -21,12 +21,12 @@
 
 .streamPlayer {
   flex: 1;
-  background: red;
+  /* background: red; */
   height: 500px;
 }
 
 .streamList {
   flex: 1;
-  background: green;
+  /* background: green; */
   height: 500px;
 }
