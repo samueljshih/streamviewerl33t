@@ -3,9 +3,12 @@ import Navbar from './Navbar.jsx';
 import StreamPlayer from './StreamPlayer.jsx';
 import StreamList from './StreamList.jsx';
 import Search from './Search.jsx';
+import ChatBox from './ChatBox.jsx';
 import ReactDOM from 'react-dom';
-var searchYoutubeStreams = require('../lib/searchYoutubeStreams');
 import axios from 'axios';
+var searchYoutubeStreams = require('../lib/searchYoutubeStreams');
+var searchChatId = require('../lib/searchChatId');
+var searchChatMessages = require('../lib/searchChatMessages');
 
 class App extends Component {
   constructor(props) {
@@ -13,7 +16,8 @@ class App extends Component {
     this.state = {
       value: '',
       streams: [],
-      currentStream: {}
+      currentStream: {},
+      chatMessages: []
     };
 
     // Binding event handlers to this context
@@ -54,6 +58,17 @@ class App extends Component {
         streams: streams,
         currentStream: streams[0]
       });
+      var currentStreamId = this.state.currentStream.id.videoId;
+      searchChatId(currentStreamId, data => {
+        var liveChatId =
+          data.data.items[0].liveStreamingDetails.activeLiveChatId;
+        searchChatMessages(liveChatId, data => {
+          var chats = data.data.items;
+          this.setState({
+            chatMessages: chats
+          });
+        });
+      });
     });
   }
 
@@ -84,8 +99,13 @@ class App extends Component {
           />
         </div>
         <div className="streamContainer">
-          <div className="streamPlayer">
-            <StreamPlayer currentStream={this.state.currentStream} />
+          <div className="streamPlayerContainer">
+            <div className="streamPlayer">
+              <StreamPlayer currentStream={this.state.currentStream} />
+            </div>
+            <div className="chatBoxContainer">
+              <ChatBox chatMessages={this.state.chatMessages} />
+            </div>
           </div>
           <div className="streamList">
             <StreamList
@@ -93,10 +113,6 @@ class App extends Component {
               onStreamEntryClicked={this.handleStreamEntryClicked}
             />
           </div>
-          {/* <button type="button" class="btn btn-primary">
-            {' '}
-            MY APP{' '}
-          </button> */}
         </div>
       </div>
     );

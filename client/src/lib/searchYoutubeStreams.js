@@ -2,7 +2,6 @@ var axios = require('axios');
 var credentials = 'AIzaSyAzK3f8em68SDXru4Hws7PbnYb6LKA1sBw';
 
 var searchYoutubeStreams = (query, callback) => {
-  console.log('Test Youtube Streams !!');
   axios
     .get('https://www.googleapis.com/youtube/v3/search', {
       params: {
@@ -15,7 +14,6 @@ var searchYoutubeStreams = (query, callback) => {
       }
     })
     .then(data => {
-      console.log('RECEIVED DATA?', data);
       callback(data);
     })
     .catch(err => {

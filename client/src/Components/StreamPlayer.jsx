@@ -19,8 +19,8 @@ class StreamPlayer extends Component {
             className="embed-responsive-item"
             src={`https://www.youtube.com/embed/${id.videoId}`}
             allowFullScreen
-            width="650"
-            height="650"
+            width="700"
+            height="400"
           />
         </div>
       </div>

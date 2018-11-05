@@ -30,6 +30,15 @@ input {
   height: 500px;
 }
 
+.streamPlayerContainer {
+  flex: 1;
+}
+
+/* .streamVideoPlayer {
+  width: 650;
+  height: 650;
+} */
+
 .streamList {
   flex: 1;
   /* background: green; */
