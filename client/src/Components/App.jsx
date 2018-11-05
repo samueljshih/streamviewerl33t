@@ -52,22 +52,31 @@ class App extends Component {
   }
 
   componentDidMount() {
+    // Set initial state to lo fi beats
     searchYoutubeStreams('lo fi beats', data => {
       var streams = data.data.items;
       this.setState({
         streams: streams,
         currentStream: streams[0]
       });
+
       var currentStreamId = this.state.currentStream.id.videoId;
       searchChatId(currentStreamId, data => {
+        // Get the Live Chat Id
         var liveChatId =
           data.data.items[0].liveStreamingDetails.activeLiveChatId;
-        searchChatMessages(liveChatId, data => {
-          var chats = data.data.items;
-          this.setState({
-            chatMessages: chats
+        setInterval(() => {
+          console.log('hello');
+        }, 1000);
+        setInterval(() => {
+          searchChatMessages(liveChatId, data => {
+            var chats = data.data.items;
+            console.log('Chats', chats);
+            this.setState({
+              chatMessages: chats
+            });
           });
-        });
+        }, 1000);
       });
     });
   }
