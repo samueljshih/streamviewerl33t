@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
 import Navbar from './Navbar.jsx';
 import StreamPlayer from './StreamPlayer.jsx';
 import StreamList from './StreamList.jsx';
@@ -6,6 +7,7 @@ import Search from './Search.jsx';
 import ChatBox from './ChatBox.jsx';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import Stats from './Stats.jsx';
 var searchYoutubeStreams = require('../lib/searchYoutubeStreams');
 var searchChatId = require('../lib/searchChatId');
 var searchChatMessages = require('../lib/searchChatMessages');
@@ -65,18 +67,15 @@ class App extends Component {
         // Get the Live Chat Id
         var liveChatId =
           data.data.items[0].liveStreamingDetails.activeLiveChatId;
-        setInterval(() => {
-          console.log('hello');
-        }, 1000);
+        console.log('DATA', data.data.items[0]);
         setInterval(() => {
           searchChatMessages(liveChatId, data => {
             var chats = data.data.items;
-            console.log('Chats', chats);
             this.setState({
               chatMessages: chats
             });
           });
-        }, 1000);
+        }, 500);
       });
     });
   }
@@ -121,6 +120,9 @@ class App extends Component {
               streams={this.state.streams}
               onStreamEntryClicked={this.handleStreamEntryClicked}
             />
+            <div className="statsContainer">
+              <Stats />
+            </div>
           </div>
         </div>
       </div>

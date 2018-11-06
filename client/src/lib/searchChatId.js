@@ -5,7 +5,7 @@ var searchChatId = (videoId, callback) => {
   axios
     .get('https://www.googleapis.com/youtube/v3/videos', {
       params: {
-        part: 'liveStreamingDetails',
+        part: 'liveStreamingDetails, snippet, statistics',
         key: credentials,
         id: videoId,
         maxResults: 5
