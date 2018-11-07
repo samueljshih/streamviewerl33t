@@ -38,6 +38,10 @@ input {
   width: 650;
   height: 650;
 } */
+.barChart {
+  width: 100% !important;
+  height: 400px !important;
+}
 
 .streamList {
   flex: 1;

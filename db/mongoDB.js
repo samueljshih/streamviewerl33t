@@ -1,13 +1,22 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/fetcher');
+var key = require('../config/mLabs');
 
-let mySchema = mongoose.Schema({
+mongoose.connect(key);
+
+let chatSchema = mongoose.Schema({
   id: String,
-  name: String
+  chat: String
 });
+let Chat = mongoose.model('chats', chatSchema);
 
-let schema = mongoose.model('schema', mySchema);
+var db = mongoose.connection;
 
-module.exports.get = () => {
-  console.log('GET!');
+// Save chats to database
+module.exports.saveChat = chat => {
+  console.log('CHAT', chat);
+  var newChat = new Chat({ chat: chat.message });
+  newChat.save(function(err, data) {
+    if (err) return console.error(err);
+    console.log('SAVED');
+  });
 };

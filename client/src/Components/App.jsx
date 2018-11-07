@@ -71,6 +71,7 @@ class App extends Component {
         setInterval(() => {
           searchChatMessages(liveChatId, data => {
             var chats = data.data.items;
+            console.log('Chats', chats);
             this.setState({
               chatMessages: chats
             });
