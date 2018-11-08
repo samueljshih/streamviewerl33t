@@ -2,12 +2,17 @@ const express = require('express');
 const parser = require('body-parser');
 const app = express();
 const mongo = require('../db/mongoDB');
+const authRoutes = require('../client/src/routes/authRoutes');
 // const sql = require('../db/databaseReqHandler.js');
 
 app.set('port', 3000);
+app.set('view engine', 'ejs');
 
 app.use(express.static('public'));
 app.use(parser.json());
+
+// Auth Route
+app.use('/auth', authRoutes);
 
 // GET
 app.get('/chats', (request, response) => {
