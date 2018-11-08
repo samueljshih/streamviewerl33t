@@ -11,15 +11,27 @@ app.use(parser.json());
 
 // GET
 app.get('/chats', (request, response) => {
-  console.log('Chat REQUEST');
-  response.end();
+  var chats = mongo.getChats();
+  chats.then(data => {
+    response.send(data);
+  });
 });
 
 // POST
 app.post('/chats', (request, response) => {
-  var chat = request.body;
-  mongo.saveChat(chat);
-  response.send('Chat Successfully Saved');
+  var chats = request.body;
+  chats.forEach(chat => {
+    var username = chat.authorDetails.displayName;
+    var message = chat.snippet.displayMessage;
+    var publishedAt = chat.snippet.publishedAt;
+    var chat = {
+      username: username,
+      message: message,
+      publishedAt: publishedAt
+    };
+    mongo.saveChat(chat);
+  });
+  response.send('');
 });
 
 app.listen(app.get('port'));

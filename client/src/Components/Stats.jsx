@@ -3,10 +3,27 @@ import { Line, Bar, Doughnut } from 'react-chartjs-2';
 
 class Stats extends Component {
   constructor(props) {
-    super();
+    super(props);
   }
 
   render() {
+    const { statMessages } = this.props;
+    let userNames = {};
+
+    if (statMessages.length === 0) {
+      return <div />;
+    }
+
+    statMessages.forEach(message => {
+      if (!userNames[message.username]) {
+        userNames[message.username] = 1;
+      } else {
+        userNames[message.username]++;
+      }
+    });
+
+    var statData = userNames;
+
     var dataSet = {
       Monday: 10,
       Tuesday: 20,
@@ -16,8 +33,8 @@ class Stats extends Component {
       Saturday: 80
     };
 
-    var categories = Object.keys(dataSet);
-    var values = Object.values(dataSet);
+    var categories = Object.keys(statData);
+    var values = Object.values(statData);
 
     var chartData = {
       labels: categories,
@@ -27,6 +44,16 @@ class Stats extends Component {
           data: values,
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
             'rgba(54, 162, 235, 0.2)',
             'rgba(255, 206, 86, 0.2)',
             'rgba(75, 192, 192, 0.2)',

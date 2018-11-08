@@ -19,7 +19,8 @@ class App extends Component {
       value: '',
       streams: [],
       currentStream: {},
-      chatMessages: []
+      chatMessages: [],
+      statMessages: []
     };
 
     // Binding event handlers to this context
@@ -67,11 +68,10 @@ class App extends Component {
         // Get the Live Chat Id
         var liveChatId =
           data.data.items[0].liveStreamingDetails.activeLiveChatId;
-        console.log('DATA', data.data.items[0]);
         setInterval(() => {
           searchChatMessages(liveChatId, data => {
             var chats = data.data.items;
-            console.log('Chats', chats);
+            this.postChatData(chats);
             this.setState({
               chatMessages: chats
             });
@@ -79,6 +79,34 @@ class App extends Component {
         }, 500);
       });
     });
+
+    this.getChatStats();
+  }
+
+  getChatStats() {
+    axios
+      .get('http://localhost:3000/chats')
+      .then(chats => {
+        console.log('Chats', chats);
+        this.setState({
+          statMessages: chats.data
+        });
+      })
+      .catch(err => {
+        console.log('Error', err);
+      });
+  }
+
+  postChatData(chats) {
+    console.log('Post Data', chats);
+    axios
+      .post('http://localhost:3000/chats', chats)
+      .then(data => {
+        console.log('Success', data);
+      })
+      .catch(err => {
+        console.log('Error', err);
+      });
   }
 
   handleStreamEntryClicked(stream) {
@@ -122,7 +150,7 @@ class App extends Component {
               onStreamEntryClicked={this.handleStreamEntryClicked}
             />
             <div className="statsContainer">
-              <Stats />
+              <Stats statMessages={this.state.statMessages} />
             </div>
           </div>
         </div>
