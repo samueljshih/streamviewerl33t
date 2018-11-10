@@ -3,10 +3,24 @@ const parser = require('body-parser');
 const app = express();
 const mongo = require('../db/mongoDB');
 const authRoutes = require('../client/src/routes/authRoutes');
-// const sql = require('../db/databaseReqHandler.js');
+const passportSetup = require('../client/src/config/passportSetup');
+const cookieSession = require('cookie-session');
+const keys = require('../client/src/config/keys');
+const passport = require('passport');
 
 app.set('port', 3000);
 app.set('view engine', 'ejs');
+
+app.use(
+  cookieSession({
+    maxAge: 24 * 60 * 60 * 1000,
+    keys: [keys.session.cookieKey]
+  })
+);
+
+// Initialize Passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(express.static('public'));
 app.use(parser.json());

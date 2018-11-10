@@ -9,11 +9,11 @@ let chatSchema = mongoose.Schema({
   message: String,
   publishedAt: String
 });
+
 let Chat = mongoose.model('chats', chatSchema);
 
 var db = mongoose.connection;
 
-// Save chats to database
 module.exports.saveChat = chat => {
   var newChat = new Chat({
     username: chat.username,
