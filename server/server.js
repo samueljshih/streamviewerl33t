@@ -3,6 +3,7 @@ const parser = require('body-parser');
 const app = express();
 const mongo = require('../db/mongoDB');
 const authRoutes = require('../client/src/routes/authRoutes');
+const profileRoutes = require('../client/src/routes/profileRoutes');
 const passportSetup = require('../client/src/config/passportSetup');
 const cookieSession = require('cookie-session');
 const keys = require('../client/src/config/keys');
@@ -27,6 +28,7 @@ app.use(parser.json());
 
 // Auth Route
 app.use('/auth', authRoutes);
+app.use('/profile', profileRoutes);
 
 // GET
 app.get('/chats', (request, response) => {
