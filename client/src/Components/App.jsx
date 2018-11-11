@@ -5,7 +5,7 @@ import StreamPlayer from './StreamPlayer.jsx';
 import StreamList from './StreamList.jsx';
 import Search from './Search.jsx';
 import ChatBox from './ChatBox.jsx';
-import ReactDOM from 'react-dom';
+import Login from './Login.jsx';
 import axios from 'axios';
 import Stats from './Stats.jsx';
 import About from './About.jsx';
@@ -75,7 +75,7 @@ class App extends Component {
             var chats = data.data.items;
             this.postChatData(chats);
             this.setState({
-              chatMessages: chats.splice(0, 10)
+              chatMessages: chats.splice(0, 5)
             });
           });
         }, 500);
@@ -126,7 +126,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <div className="navbar">
+        <div className="navbar fade-in">
           <Navbar />
         </div>
         <Switch>
@@ -142,6 +142,7 @@ class App extends Component {
               );
             }}
           />
+          <Route path="/login" component={Login} />
           <Route
             path="/"
             render={() => {
@@ -168,6 +169,7 @@ class App extends Component {
                       </div>
                     </div>
                     <div className="streamList">
+                      <h1>Stream List</h1>
                       <StreamList
                         streams={this.state.streams}
                         onStreamEntryClicked={this.handleStreamEntryClicked}
