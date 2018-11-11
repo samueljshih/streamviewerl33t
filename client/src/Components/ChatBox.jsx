@@ -6,7 +6,6 @@ const ChatBox = props => {
 
   return (
     <div className="chatBox">
-      <h1>Chatbox</h1>
       <div className="messages">
         {props.chatMessages.map(chat => {
           return <Chat chat={chat} key={count++} />;

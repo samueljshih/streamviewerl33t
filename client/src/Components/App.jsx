@@ -73,7 +73,7 @@ class App extends Component {
             var chats = data.data.items;
             this.postChatData(chats);
             this.setState({
-              chatMessages: chats
+              chatMessages: chats.splice(0, 10)
             });
           });
         }, 500);
@@ -127,6 +127,8 @@ class App extends Component {
         <div className="navbar">
           <Navbar />
         </div>
+        {/* <Switch> */}
+        {/* <Route path="/about" component={Search} /> */}
         <div className="searchContainer">
           <Search
             onInputChange={this.handleInputChange}
@@ -140,6 +142,7 @@ class App extends Component {
             <div className="streamPlayer">
               <StreamPlayer currentStream={this.state.currentStream} />
             </div>
+            <h1>Chatbox</h1>
             <div className="chatBoxContainer">
               <ChatBox chatMessages={this.state.chatMessages} />
             </div>
@@ -154,6 +157,7 @@ class App extends Component {
             </div>
           </div>
         </div>
+        {/* </Switch> */}
       </div>
     );
   }

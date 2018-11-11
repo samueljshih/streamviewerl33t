@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-      <a className="navbar-brand" href="#">
-        Stream Viewer L33T
-      </a>
+      <Link className="navbar-brand" to="/">
+        Stream Viewer
+      </Link>
       <button
         className="navbar-toggler"
         type="button"
@@ -21,19 +22,24 @@ const Navbar = () => {
       <div className="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item active">
-            <a className="nav-link" href="#">
+            <Link className="nav-link" to="/">
               Home <span className="sr-only">(current)</span>
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">
+            <Link className="nav-link" to="/about">
               About
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link disabled" href="#">
+            <Link className="nav-link disabled" to="/stats">
+              Stats
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link disabled" to="/contact">
               Contact
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

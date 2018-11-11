@@ -3,7 +3,45 @@ input {
   width: 500px !important;
 }
 
+body {
+  background: #edf0f2;
+  font-family: 'Quicksand', sans-serif;
+}
+
+h1 {
+  color: #005ba8;
+}
+
 /* CLASS STYLING */
+
+.navbar-brand {
+  color: #ffc20e !important;
+  font-size: 27px;
+}
+
+.chatBoxContainer {
+  border-radius: 25px;
+  background: gainsboro;
+  padding: 20px;
+}
+
+.chatMessages {
+  display: flex;
+}
+
+.chatAvatar {
+  flex: 1;
+}
+
+.chatUserDetails {
+  flex: 4;
+}
+
+.chatUserName {
+  font-weight: bold;
+  font-size: 22px;
+}
+
 .navbar {
   margin-bottom: 50px;
 }
