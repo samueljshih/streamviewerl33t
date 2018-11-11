@@ -8,6 +8,8 @@ import ChatBox from './ChatBox.jsx';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Stats from './Stats.jsx';
+import About from './About.jsx';
+import Contact from './Contact.jsx';
 var searchYoutubeStreams = require('../lib/searchYoutubeStreams');
 var searchChatId = require('../lib/searchChatId');
 var searchChatMessages = require('../lib/searchChatMessages');
@@ -127,37 +129,56 @@ class App extends Component {
         <div className="navbar">
           <Navbar />
         </div>
-        {/* <Switch> */}
-        {/* <Route path="/about" component={Search} /> */}
-        <div className="searchContainer">
-          <Search
-            onInputChange={this.handleInputChange}
-            onSearch={this.handleSearch}
-            onEnter={this.handleEnter}
-            value={this.state.value}
+        <Switch>
+          <Route path="/about" component={About} />
+          <Route path="/contact" component={Contact} />
+          <Route
+            path="/stats"
+            render={() => {
+              return (
+                <div className="statsContainer">
+                  <Stats statMessages={this.state.statMessages} />
+                </div>
+              );
+            }}
           />
-        </div>
-        <div className="streamContainer">
-          <div className="streamPlayerContainer">
-            <div className="streamPlayer">
-              <StreamPlayer currentStream={this.state.currentStream} />
-            </div>
-            <h1>Chatbox</h1>
-            <div className="chatBoxContainer">
-              <ChatBox chatMessages={this.state.chatMessages} />
-            </div>
-          </div>
-          <div className="streamList">
-            <StreamList
-              streams={this.state.streams}
-              onStreamEntryClicked={this.handleStreamEntryClicked}
-            />
-            <div className="statsContainer">
-              <Stats statMessages={this.state.statMessages} />
-            </div>
-          </div>
-        </div>
-        {/* </Switch> */}
+          <Route
+            path="/"
+            render={() => {
+              return (
+                <div>
+                  <div className="searchContainer">
+                    <Search
+                      onInputChange={this.handleInputChange}
+                      onSearch={this.handleSearch}
+                      onEnter={this.handleEnter}
+                      value={this.state.value}
+                    />
+                  </div>
+                  <div className="streamContainer">
+                    <div className="streamPlayerContainer">
+                      <div className="streamPlayer">
+                        <StreamPlayer
+                          currentStream={this.state.currentStream}
+                        />
+                      </div>
+                      <h1>Chatbox</h1>
+                      <div className="chatBoxContainer">
+                        <ChatBox chatMessages={this.state.chatMessages} />
+                      </div>
+                    </div>
+                    <div className="streamList">
+                      <StreamList
+                        streams={this.state.streams}
+                        onStreamEntryClicked={this.handleStreamEntryClicked}
+                      />
+                    </div>
+                  </div>
+                </div>
+              );
+            }}
+          />
+        </Switch>
       </div>
     );
   }
